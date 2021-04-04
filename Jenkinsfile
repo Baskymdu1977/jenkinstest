@@ -1,4 +1,5 @@
-import jenkins.model.Jenkins
+#!groovy
+import jenkins.model.Jenkins;
 
 pipeline {
     agent any 
