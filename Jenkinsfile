@@ -1,4 +1,3 @@
-#!groovy
 import jenkins.model.Jenkins;
 
 pipeline {
@@ -7,14 +6,18 @@ pipeline {
         stage('Stage 1') {
             steps {
                 echo 'Hello world!' 
-                Jenkins.instance.getItemByFullName(multibranchPipelineProjectName).getItems().each { repository->
-		  repository.getItems().each { branch->
-		    branch.builds.each { build->
-			echo " build " + build
-			}
-		  }
-}
-            }
+
+
+                script {
+                            def buildName = Jenkins.instance.getItemByFullName('repotest/feature%2FPR3')
+                            echo "Last success: ${buildName.getLastSuccessfulBuild()}"
+                            echo "All builds: ${buildName.getBuilds().collect{ it.getNumber()}}"
+                            echo "Last build: ${buildName.getLastBuild()}"
+                            echo "Is building: ${buildName.isBuilding()}"                      
+                    
+                }
+
+              }
         }
     }
 }
