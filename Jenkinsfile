@@ -1,3 +1,5 @@
+import jenkins.model.Jenkins
+
 pipeline {
     agent any 
     stages {
